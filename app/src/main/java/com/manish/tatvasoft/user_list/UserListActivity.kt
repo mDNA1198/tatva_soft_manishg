@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
+import com.manish.tatvasoft.adapters.UserListRecyclerView
 import com.manish.tatvasoft.databinding.UserListActivityBinding
 import com.manish.tatvasoft.retrofit_networking.RetrofitInstance
 
@@ -15,6 +16,8 @@ class UserListActivity : AppCompatActivity() {
 
     private val userListService = RetrofitInstance.userListService
     private lateinit var userViewModel: UserListViewModel
+
+    private lateinit var adapter: UserListRecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,8 @@ class UserListActivity : AppCompatActivity() {
 
         userViewModel = ViewModelProvider(this, UserListViewModelFactory(UserListRepository(userListService)))[UserListViewModel::class.java]
         binding.mainRV.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
+        adapter = UserListRecyclerView(this)
+        binding.mainRV.adapter = adapter
 
     }
 
@@ -37,6 +41,7 @@ class UserListActivity : AppCompatActivity() {
 
         userViewModel.userListModel.observe(this,{
             Log.e("dataReceived", Gson().toJson(it))
+            adapter.setUserDataList(it.data.users)
         })
 
     }

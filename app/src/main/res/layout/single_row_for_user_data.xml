@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="4dp"
+    app:cardBackgroundColor="#fefefe"
+    android:layout_margin="2dp"
     >
 
     <LinearLayout
@@ -55,10 +57,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:id="@+id/oddImageView"
-            android:background="@color/teal_700"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="2dp"
             android:visibility="gone"
             />
 

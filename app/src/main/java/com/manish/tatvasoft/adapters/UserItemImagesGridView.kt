@@ -1,7 +1,12 @@
 package com.manish.tatvasoft.adapters
 
 import android.content.Context
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.core.view.marginEnd
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.manish.tatvasoft.databinding.SingleRowForUserItemImagesBinding
@@ -9,7 +14,8 @@ import com.manish.tatvasoft.databinding.SingleRowForUserItemImagesBinding
 class UserItemImagesGridView constructor(val imageList: ArrayList<String>, val context: Context) : RecyclerView.Adapter<UserItemImagesGridView.UserItemsImagesViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserItemImagesGridView.UserItemsImagesViewHolder {
-        TODO("Not yet implemented")
+        val binding: SingleRowForUserItemImagesBinding = SingleRowForUserItemImagesBinding.inflate(LayoutInflater.from(context), parent, false)
+        return UserItemsImagesViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: UserItemImagesGridView.UserItemsImagesViewHolder, position: Int) {
@@ -22,6 +28,18 @@ class UserItemImagesGridView constructor(val imageList: ArrayList<String>, val c
 
         fun bindData(position: Int){
             Glide.with(context).asBitmap().load(imageList[position]).into(binding.evenImageView)
+
+            var linearLayout = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+
+            if(position % 2 != 0){
+                linearLayout.marginEnd = 2
+                binding.evenImageView.layoutParams = linearLayout
+            }else{
+                linearLayout.marginStart = 2
+                binding.evenImageView.layoutParams = linearLayout
+            }
+
+
         }
 
     }
