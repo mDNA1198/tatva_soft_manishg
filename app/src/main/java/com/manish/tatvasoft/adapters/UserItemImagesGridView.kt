@@ -27,18 +27,18 @@ class UserItemImagesGridView constructor(val imageList: ArrayList<String>, val c
     inner class UserItemsImagesViewHolder(val binding: SingleRowForUserItemImagesBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bindData(position: Int){
-            Glide.with(context).asBitmap().load(imageList[position]).into(binding.evenImageView)
-
             var linearLayout = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
 
-            if(position % 2 != 0){
-                linearLayout.marginEnd = 2
-                binding.evenImageView.layoutParams = linearLayout
+            if(position == 0){
+                linearLayout.marginEnd = 10
+            }else if(position % 2 == 0) {
+                linearLayout.marginEnd = 10
             }else{
-                linearLayout.marginStart = 2
-                binding.evenImageView.layoutParams = linearLayout
+                linearLayout.marginStart = 10
             }
 
+            binding.evenImageView.layoutParams = linearLayout
+            Glide.with(context).asBitmap().load(imageList[position]).into(binding.evenImageView)
 
         }
 
