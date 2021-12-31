@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.manish.tatvasoft.databinding.SingleRowForUserDataBinding
 import com.manish.tatvasoft.models.Users
+import com.manish.tatvasoft.user_list.UserListContract
 
-class UserListRecyclerView constructor(val context: Context) : RecyclerView.Adapter<UserListRecyclerView.UserListViewHolder>(){
+class UserListRecyclerView constructor(val context: Context, val view: UserListContract.UserListView) : RecyclerView.Adapter<UserListRecyclerView.UserListViewHolder>(){
 
     private var userDataList: ArrayList<Users> = arrayListOf()
 
@@ -26,6 +27,9 @@ class UserListRecyclerView constructor(val context: Context) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: UserListRecyclerView.UserListViewHolder, position: Int) {
         holder.bindData(position)
+        if (position == userDataList.size - 1 && position <= userDataList.size) {
+            view.loadUserList()
+        }
     }
 
     override fun getItemCount(): Int = userDataList.size

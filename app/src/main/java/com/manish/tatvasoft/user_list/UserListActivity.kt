@@ -10,7 +10,7 @@ import com.manish.tatvasoft.adapters.UserListRecyclerView
 import com.manish.tatvasoft.databinding.UserListActivityBinding
 import com.manish.tatvasoft.retrofit_networking.RetrofitInstance
 
-class UserListActivity : AppCompatActivity() {
+class UserListActivity : AppCompatActivity(), UserListContract.UserListView {
 
     private lateinit var binding: UserListActivityBinding
 
@@ -25,14 +25,14 @@ class UserListActivity : AppCompatActivity() {
         setContentView(binding.root)
         initUI()
         initObservers()
-        fetchData()
+        loadUserList()
     }
 
     fun initUI(){
 
         userViewModel = ViewModelProvider(this, UserListViewModelFactory(UserListRepository(userListService)))[UserListViewModel::class.java]
         binding.mainRV.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        adapter = UserListRecyclerView(this)
+        adapter = UserListRecyclerView(this, this)
         binding.mainRV.adapter = adapter
 
     }
@@ -46,9 +46,7 @@ class UserListActivity : AppCompatActivity() {
 
     }
 
-    fun fetchData(){
+    override fun loadUserList() {
         userViewModel.getUserList()
     }
-
-
 }
