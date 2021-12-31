@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class UserListModel(
     @SerializedName("status"  ) var status  : Boolean,
-    @SerializedName("message" ) var message : String,
+    @SerializedName("message" ) var message : String? = null,
     @SerializedName("data"    ) var data    : Data
 )
 
